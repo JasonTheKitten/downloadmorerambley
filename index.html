@@ -1,0 +1,326 @@
+<!doctype html>
+<html>
+	<head>
+		<title>Download More Rambley</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1"/>
+		<meta name="og:type" content="website"/>
+		<meta name="og:title" content="Download More Rambley"/>
+		<meta name="og:url" content="https://downloadmorerambley.com"/>
+		<meta name="og:description" content="Don't just download more RAM, download more RAMbley!"/>
+		<meta name="og:image" content="https://downloadmorerambley.com/favicon.png"/>
+		<link rel="icon" href="favicon.png"/>
+		<style>
+			.app {
+				width: 100%;
+				min-height: 100%;
+				margin: 0;
+				font-family: "Open Sans", sans-serif;
+
+				display: flex;
+				flex-direction: column;
+				justify-content: space-between;
+
+				--topbar-color: #4B0082;
+				--background-accent-color: #9305FF;
+				--background-accent-hover-color: #B350FF;
+				--background-slight-accent-color: #FAF4FF;
+				--text-plain-color: #000000;
+				--text-accent-color: #FFFFFF;
+				--text-slight-accent-color: #6C6C6C;
+			}
+			#topbar {
+				flex: 1;
+				padding: 1em;
+				padding-top: .5em;
+				padding-bottom: .5em;
+				background-color: var(--topbar-color);
+				color: var(--text-accent-color);
+			}
+			#topbar > h1 {
+				padding: 0;
+				margin: 0;
+				font-size: 1.75em;
+			}
+			#topbar > h1 > a {
+				color: var(--text-accent-color);
+			}
+			#bottombar {
+				width: 100%;
+				padding-top: 1em;
+				padding-bottom: 1em;
+				background-color: #EBEBEB;
+				text-align: center;
+			}
+			#bottombar > p {
+				margin: .3em;
+			}
+			#about-card {
+				background-color: var(--background-accent-color);
+				color: var(--text-accent-color);
+				
+				box-sizing: border-box;
+				width: 100%;
+				padding-top: 2em;
+				padding-bottom: 2em;
+				padding-left: 4em;
+				padding-right: 4em;
+				text-wrap: wrap;
+
+				display: flex;
+				flex-direction: row;
+				flex-wrap: wrap;
+				justify-content: space-between;
+				align-items: center;
+				row-gap: 2em;
+			}
+			@media only screen and (max-width: 600px) {
+				#about-card {
+					font-size: .5em;
+				}
+			}
+			#about-main-header, #about-main-subheader, #about-main-desc {
+				margin: 0;
+			}
+			#about-main-desc > :first-child {
+				margin-top: 0;
+			}
+			#about-main-header {
+				font-size: 4em;
+			}
+			#about-main-subheader {
+				font-size: 1.75em;
+				font-style: italic;
+			}
+			#about-main-desc {
+				font-size: 1.5em;
+			}
+			#about-main {
+				display: inline-block;
+				max-width: 1152px;
+			}
+			#about-indigo {
+				display: inline-block;
+			}
+			#indigo-logo {
+				max-width: 100%;
+			}
+			#selection-text {
+				margin-top: 4em;
+				text-align: center;
+			}
+			#selection-text > span {
+				font-size: 1.5em;
+				font-weight: 600;
+			}
+			#selection-text > h2 {
+				color: var(--background-accent-color);
+				font-size: 3em;
+				margin: 0;
+			}
+			#character-options {
+				padding-top: 2em;
+				max-width: 75%;
+				margin: auto;
+				margin-bottom: 4em;
+
+				display: flex;
+				flex-direction: row;
+				flex-wrap: wrap;
+				justify-content: center;
+				gap: 2em;
+				row-gap: 2em;
+			}
+			.character-option-outer {
+				width: 31em;
+				max-width: 100%;
+				min-height: 15em;
+
+				background-color: var(--background-slight-accent-color);
+				box-sizing: border-box;
+				padding: 2em;
+				outline: 2px solid var(--background-accent-color);
+				
+				display: flex;
+				flex-direction: row;
+				flex-wrap: wrap;
+				justify-content: center;
+				align-items: center;
+
+				row-gap: 1em;
+				column-gap: 2em;
+			}
+			.character-option-avatar {
+				width: 11em;
+				flex-shrink: 0;
+				flex-grow: 0;
+				height: 11em;
+				border-radius: 100%;
+				background-color: var(--background-accent-color);
+			}
+			.character-option-info {
+				max-width: 14em;
+				/*margin-left: 2em;*/
+			}
+			.character-option-info > h3 {
+				margin: 0;
+			}
+			.character-option-info > h4 {
+				margin: 0;
+				color: var(--text-slight-accent-color);
+				font-size: .75em;
+			}
+			.character-option-info > p {
+				color: var(--text-slight-accent-color);
+
+				margin-top: .5em;
+				margin-bottom: .75em;
+			}
+			.character-option-select {
+				font-family: inherit;
+				width: 100%;
+				color: var(--text-accent-color);
+				background-color: var(--background-accent-color);
+				border: none;
+				padding: .1em;
+				font-size: 1.25em;
+				font-weight: 700;
+				cursor: pointer;
+			}
+			.character-option-select:hover {
+				background-color: var(--background-accent-hover-color);
+			}
+			html {
+				height: 100%;
+			}
+			a {
+				text-decoration: none;
+			}
+			a.dmr-link {
+				color: #98FF90
+			}
+		</style>
+		<script>
+			function deleteLloyd() {
+				document.getElementById("character-option-lloyd").remove();
+			}
+			function download(character) {
+				if (character == "rambley") {
+					if (confirm("You are about to go to a Rambley Shimeji download link hosted by somebody else. I do not control this. Proceed anyways?" +
+						" (note: the other links just go to the Indigo download)")) {
+						window.open("https://drive.google.com/file/d/1yaOyAKweVKgcgo_Uw6knnNzs6UD9ikmq/view");
+					}
+				} else {
+					window.open("https://store.steampowered.com/app/2504480/Indigo_Park_Chapter_1/");
+				}
+			}
+		</script>
+	</head>
+	<body class="app">
+		<div>
+		<div id="topbar">
+			<h1><a href="/">Download More Rambley</a></h1>
+		</div>
+		<div id="about-card">
+			<div id="about-main">
+				<h2 id="about-main-header">
+					Feeling Alone?
+				</h2>
+				<h3 id="about-main-subheader">
+					Make your computer faster and friendlier!
+				</h3>
+				<div id="about-main-desc">
+					<p>
+						Everyone knows you can
+						<a href="https://downloadmoreram.com" class="dmr-link">download more RAM</a>.
+						But it won't cure the void in your heart caused by socially isolating
+						yourself as you play games all day. You really need some social
+						interaction... and now you can get it without leaving your computer!
+					</p>
+					<p>Download More Rambley doesn't just give you RAM - It gives you RAMbley!</p>
+				</div>
+			</div>
+			<div id="about-indigo">
+				<img src="assets/indigologo.png" alt="Indigo Park Logo" id="indigo-logo"/><br/>
+				<b>Powered by Indigo Park &circledR; Surveillance Technologies</b>
+			</div>
+		</div>
+		<div id="selection-card">
+			<div id="selection-text">
+				<span>So what are you waiting for?</span>
+				<h2>Select your [fatal error]!</h2>
+			</div>
+			<div id="character-options">
+				<div class="character-option-outer">
+					<img class="character-option-avatar" src="assets/rambley_avatar.png" alt="Rambley Avatar"/>
+					<div class="character-option-info">
+						<h3>Rambley</h3>
+						<h4>Racoon &bullet; 32 GiB</h4>
+						<p>
+							Hey there! I'm Rambley, and I can't wait to
+							"ramble on" about your favorite topics!
+						</p>
+						<button class="character-option-select" onclick="download('rambley')">Download Now</button>
+					</div>
+				</div>
+				<div class="character-option-outer">
+					<img class="character-option-avatar" src="assets/mollie_avatar.png" alt="Mollie Avatar"/>
+					<div class="character-option-info">
+						<h3>Mollie</h3>
+						<h4>Macaw &bullet; 24 GiB</h4>
+						<p>
+							I'm Mollie Macaw, the greatest pilot you ever
+							saw! Let's go barnstorming!
+						</p>
+						<button class="character-option-select" onclick="download('mollie')">Download Now</button>
+					</div>
+				</div>
+				<div class="character-option-outer">
+					<img class="character-option-avatar" src="assets/finley_avatar.png" alt="Finley Avatar"/>
+					<div class="character-option-info">
+						<h3>Finley</h3>
+						<h4>Serpant &bullet; 16 GiB</h4>
+						<p>
+							Oh, hi there. Sorry if... nevermind. Maybe we
+							could find some seashells...
+						</p>
+						<button class="character-option-select" onclick="download('finley')">Download Now</button>
+					</div>
+				</div>
+				<div class="character-option-outer">
+					<img class="character-option-avatar" src="assets/salem_avatar.png" alt="Salem Avatar"/>
+					<div class="character-option-info">
+						<h3>Salem</h3>
+						<h4>Skunk &bullet; 8 GiB</h4>
+						<p>
+							Yvjrpu' pu, Zhslt aol Zrbur!
+							Sla'z nv ohcl h spaasl mbu...
+							iba kvu'a svvzl avv thuf sptiz!
+						</p>
+						<button class="character-option-select" onclick="download('salem')">Download Now</button>
+					</div>
+				</div>
+				<div class="character-option-outer" id="character-option-lloyd">
+					<img class="character-option-avatar" src="assets/lloyd_avatar.png" alt="Lloyd Avatar"/>
+					<div class="character-option-info">
+						<h3>Mistake</h3>
+						<h4>Lion &bullet; 0 GiB</h4>
+						<p>
+							I am the  GRRRREAT Llyod!
+							And I shall give you a PURRRFECT act!
+						</p>
+						<button class="character-option-select" onclick="deleteLloyd()">Delete</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		</div>
+		<div id="bottombar">
+			<p>This page is solely intended as a joke.</p>
+			<p>
+				Based on
+				<a href="https://store.steampowered.com/app/2504480/Indigo_Park_Chapter_1/">Indigo Park</a>
+				by UniqueGeese (No affiliation)
+			</p>
+		</div>
+	</body>
+</html>
